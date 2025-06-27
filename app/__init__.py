@@ -40,7 +40,7 @@ def create_app():
     mail.init_app(app)
     Migrate(app, db)
 
-    # CORS para múltiples dominios de frontend (Vercel)
+    # CORS para múltiples dominios permitidos
     CORS(app, resources={r"/api/*": {"origins": [
         "https://crew-ai-front-laeros-projects.vercel.app",
         "https://crew-ai-front-3gqlmdm0i-laeros-projects.vercel.app"

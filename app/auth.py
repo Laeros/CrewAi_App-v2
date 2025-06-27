@@ -1,16 +1,23 @@
-
 from flask import Blueprint, request, jsonify
 from functools import wraps
 from app.models import User, db
 from flask_mail import Message
 from app import mail
 from itsdangerous import URLSafeTimedSerializer, BadSignature, SignatureExpired
+from flask_cors import cross_origin
 import re
 import os
 from app.utils.logger import log_event
 
 auth_bp = Blueprint('auth', __name__, url_prefix='/api/auth')
 serializer = URLSafeTimedSerializer(os.getenv("JWT_SECRET_KEY", "clave-ultra-secreta"))
+
+# Lista de dominios frontend permitidos
+ALLOWED_ORIGINS = [
+    "https://crew-ai-front-laeros-projects.vercel.app",
+    "https://crew-ai-front-3gqlmdm0i-laeros-projects.vercel.app",
+    "http://localhost:5173"  # opcional para desarrollo local
+]
 
 # ------------------- UTILIDADES -------------------
 
@@ -60,6 +67,7 @@ def validate_password(password):
 # ------------------- ENDPOINTS -------------------
 
 @auth_bp.route('/register', methods=['POST'])
+@cross_origin(origins=ALLOWED_ORIGINS, supports_credentials=True)
 def register():
     try:
         data = request.get_json()
@@ -103,10 +111,8 @@ def register():
         return jsonify({'message': f'Error interno del servidor: {str(e)}'}), 500
 
 @auth_bp.route('/login', methods=['POST', 'OPTIONS'])
+@cross_origin(origins=ALLOWED_ORIGINS, supports_credentials=True)
 def login():
-    if request.method == 'OPTIONS':
-        return '', 200
-
     try:
         data = request.get_json()
         if not data or not data.get('login') or not data.get('password'):
@@ -126,7 +132,6 @@ def login():
             return jsonify({'message': 'Cuenta desactivada'}), 401
 
         token = user.generate_token()
-
         log_event(f"✅ Login exitoso: {user.username}")
 
         return jsonify({
@@ -140,17 +145,20 @@ def login():
 
 @auth_bp.route('/me', methods=['GET'])
 @token_required
+@cross_origin(origins=ALLOWED_ORIGINS, supports_credentials=True)
 def get_current_user_info(current_user):
     return jsonify({'user': current_user.to_dict()}), 200
 
 @auth_bp.route('/logout', methods=['POST'])
 @token_required
+@cross_origin(origins=ALLOWED_ORIGINS, supports_credentials=True)
 def logout(current_user):
     log_event(f"🚪 Logout exitoso: {current_user.username}")
     return jsonify({'message': 'Logout exitoso'}), 200
 
 @auth_bp.route('/change-password', methods=['PUT'])
 @token_required
+@cross_origin(origins=ALLOWED_ORIGINS, supports_credentials=True)
 def change_password(current_user):
     try:
         data = request.get_json()
@@ -181,6 +189,7 @@ def change_password(current_user):
 
 @auth_bp.route('/update-profile', methods=['PUT'])
 @token_required
+@cross_origin(origins=ALLOWED_ORIGINS, supports_credentials=True)
 def update_profile(current_user):
     try:
         data = request.get_json()
@@ -219,6 +228,7 @@ def update_profile(current_user):
         return jsonify({'message': f'Error interno del servidor: {str(e)}'}), 500
 
 @auth_bp.route('/request-reset', methods=['POST'])
+@cross_origin(origins=ALLOWED_ORIGINS, supports_credentials=True)
 def request_reset():
     try:
         data = request.get_json()
@@ -263,6 +273,7 @@ El equipo de CrewAIApp
         return jsonify({'message': f'Error al enviar el correo: {str(e)}'}), 500
 
 @auth_bp.route('/reset-password', methods=['POST'])
+@cross_origin(origins=ALLOWED_ORIGINS, supports_credentials=True)
 def reset_password():
     try:
         data = request.get_json()
