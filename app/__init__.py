@@ -40,15 +40,11 @@ def create_app():
     mail.init_app(app)
     Migrate(app, db)
 
-    # Configuración de CORS
-    CORS(app, resources={
-        r"/api/*": {
-            "origins": [
-                "http://localhost:5173",  # para desarrollo local
-                "https://crew-ai-front-laeros-projects.vercel.app"  # producción en Vercel
-            ]
-        }
-    }, supports_credentials=True)
+    # CORS para múltiples dominios de frontend (Vercel)
+    CORS(app, resources={r"/api/*": {"origins": [
+        "https://crew-ai-front-laeros-projects.vercel.app",
+        "https://crew-ai-front-3gqlmdm0i-laeros-projects.vercel.app"
+    ]}}, supports_credentials=True)
 
     # Registrar blueprints
     from .routes import api_bp
@@ -56,7 +52,7 @@ def create_app():
     app.register_blueprint(api_bp)
     app.register_blueprint(auth_bp)
 
-    # Crear tablas y usuario administrador por defecto
+    # Crear tablas y usuario administrador
     with app.app_context():
         db.create_all()
 
@@ -73,9 +69,9 @@ def create_app():
             new_admin = User(
                 username='admin',
                 email=admin_email,
+                password=admin_password,
                 is_admin=True
             )
-            new_admin.set_password(admin_password)
             db.session.add(new_admin)
             db.session.commit()
             print(f"✅ Admin creado: {admin_email} / {admin_password}")
