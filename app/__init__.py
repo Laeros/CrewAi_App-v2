@@ -41,16 +41,7 @@ def create_app():
     Migrate(app, db)
 
     # Configurar CORS
-    CORS(app, resources={
-        r"/api/*": {
-            "origins": [
-                "http://localhost:5173",
-                "https://crew-ai-front-laeros-projects.vercel.app/"
-            ],
-            "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-            "allow_headers": ["Content-Type", "Authorization"]
-        }
-    })
+    CORS(app, supports_credentials=True)
 
     # Registrar blueprints
     from .routes import api_bp
