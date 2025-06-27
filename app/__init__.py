@@ -42,6 +42,7 @@ def create_app():
 
     # CORS para múltiples dominios permitidos
     CORS(app, resources={r"/api/*": {"origins": [
+        "https://crew-ai-front.vercel.app",
         "https://crew-ai-front-laeros-projects.vercel.app",
         "https://crew-ai-front-3gqlmdm0i-laeros-projects.vercel.app"
     ]}}, supports_credentials=True)
