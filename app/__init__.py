@@ -40,11 +40,13 @@ def create_app():
     mail.init_app(app)
     Migrate(app, db)
 
-    # CORS para múltiples dominios permitidos
+    # CORS para múltiples dominios permitidos - CORREGIDO
     CORS(app, resources={r"/api/*": {"origins": [
         "https://crew-ai-front.vercel.app",
         "https://crew-ai-front-laeros-projects.vercel.app",
-        "https://crew-ai-front-3gqlmdm0i-laeros-projects.vercel.app"
+        "https://crew-ai-front-3gqlmdm0i-laeros-projects.vercel.app",
+        "http://localhost:3000",  # Para desarrollo local
+        "http://localhost:5173"   # Para Vite en desarrollo
     ]}}, supports_credentials=True)
 
     # Registrar blueprints
