@@ -40,8 +40,10 @@ def create_app():
     mail.init_app(app)
     Migrate(app, db)
 
-    # Configurar CORS
-    CORS(app, supports_credentials=True)
+    # CORS específico para tu frontend de producción
+    CORS(app, resources={r"/api/*": {"origins": [
+        "https://crew-ai-front-laeros-projects.vercel.app"
+    ]}}, supports_credentials=True)
 
     # Registrar blueprints
     from .routes import api_bp
