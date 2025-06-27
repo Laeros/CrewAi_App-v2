@@ -1,0 +1,148 @@
+/* 
+ * MAIN.CSS
+ * Archivo principal que importa todos los módulos CSS en el orden correcto
+ * Uso: Importar SOLO este archivo en tu HTML/React app
+ * 
+ * ESTRUCTURA DE IMPORTACIÓN:
+ * 1. Variables y configuración base
+ * 2. Reset y estilos fundamentales
+ * 3. Layout y estructura
+ * 4. Componentes principales
+ * 5. Elementos específicos
+ * 6. Responsive y utilidades
+ */
+
+/* ==========================================================================
+   1. CONFIGURACIÓN BASE
+   ========================================================================== */
+
+/* Variables CSS - DEBE importarse PRIMERO */
+@import './variables.css';
+
+/* Reset CSS y estilos base del documento */
+@import './reset-base.css';
+
+/* ==========================================================================
+   2. LAYOUT Y ESTRUCTURA
+   ========================================================================== */
+
+/* Layout principal de la aplicación */
+@import './layout.css';
+
+/* ==========================================================================
+   3. COMPONENTES PRINCIPALES
+   ========================================================================== */
+
+/* Panel izquierdo y sidebar */
+@import './sidebar.css';
+
+/* Área de chat y mensajes */
+@import './chat.css';
+
+/* ==========================================================================
+   4. ELEMENTOS DE UI
+   ========================================================================== */
+
+/* Todos los botones */
+@import './buttons.css';
+
+/* Formularios e inputs */
+@import './forms.css';
+
+/* Listas y elementos de listado */
+@import './lists.css';
+
+/* ==========================================================================
+   5. RESPONSIVE Y UTILIDADES
+   ========================================================================== */
+
+/* Media queries y responsive design */
+@import './responsive.css';
+
+/* Utilidades, animaciones y helpers */
+@import './utilities.css';
+
+/* ==========================================================================
+   ESTILOS GLOBALES ADICIONALES
+   ========================================================================== */
+
+/* Ajustes finales y overrides si son necesarios */
+body {
+  /* Asegurar que la fuente se aplique correctamente */
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  
+  /* Mejorar el renderizado de fuentes */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Mejorar el scroll en Safari */
+* {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Asegurar que los elementos interactivos sean accesibles */
+button, 
+[role="button"], 
+input[type="submit"], 
+input[type="button"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* Mejorar la selección de texto */
+::selection {
+  background-color: rgba(59, 130, 246, 0.2);
+  color: var(--text-primary);
+}
+
+::-moz-selection {
+  background-color: rgba(59, 130, 246, 0.2);
+  color: var(--text-primary);
+}
+
+/* ==========================================================================
+   PRINT STYLES GLOBALES
+   ========================================================================== */
+
+@media print {
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
+
+/* ==========================================================================
+   COMPATIBILIDAD CON NAVEGADORES ANTIGUOS
+   ========================================================================== */
+
+/* Fallbacks para navegadores que no soportan CSS custom properties */
+@supports not (color: var(--primary-color)) {
+  /* Fallbacks básicos para navegadores muy antiguos */
+  .new-chat-btn {
+    background-color: #3b82f6;
+  }
+  
+  .send-button {
+    background-color: #3b82f6;
+  }
+  
+  .tools-button {
+    background-color: #374151;
+  }
+  
+  body {
+    background-color: #0a0a0a;
+    color: #ffffff;
+  }
+  
+  .left-panel {
+    background-color: #1a1a1a;
+  }
+  
+  .right-panel {
+    background-color: #0a0a0a;
+  }
+}

@@ -1,0 +1,266 @@
+/* 
+ * LAYOUT.CSS
+ * Contiene: Layout principal, contenedores, panels, estructura responsive
+ * Uso: Para la estructura general de la aplicación
+ * Dependencias: variables.css, reset-base.css
+ */
+
+/* Contenedor principal de la aplicación */
+.app-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  gap: 0;
+}
+
+/* Panel izquierdo - Sidebar */
+.left-panel {
+  width: 500px;
+  min-width: 300px;
+  max-width: 600px;
+  background: linear-gradient(180deg, var(--background-secondary) 0%, var(--background-tertiary) 100%);
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #2a2a2a;
+  position: relative;
+  transition: all var(--transition-medium);
+  overflow: hidden;
+  box-shadow: 2px 0 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Estado expandido del panel izquierdo */
+.left-panel.expanded {
+  width: 650px;
+  max-width: 650px;
+}
+
+/* Header del panel izquierdo */
+.left-panel-header {
+  padding: var(--spacing-lg) var(--spacing-md);
+  border-bottom: 1px solid #2a2a2a;
+  background: linear-gradient(135deg, #1e1e1e 0%, var(--background-secondary) 100%);
+  flex-shrink: 0;
+  position: relative;
+}
+
+.left-panel-header::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--primary-color) 50%, transparent 100%);
+}
+
+/* Contenido scrolleable del panel izquierdo */
+.left-panel-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--spacing-md);
+  background: transparent;
+}
+
+/* Scrollbar personalizado para panel izquierdo */
+.left-panel-content::-webkit-scrollbar {
+  width: 4px;
+}
+
+.left-panel-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.left-panel-content::-webkit-scrollbar-thumb {
+  background: rgba(59, 130, 246, 0.3);
+  border-radius: 2px;
+}
+
+.left-panel-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(59, 130, 246, 0.5);
+}
+
+/* Panel derecho - Área de chat */
+.right-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, var(--background-primary) 0%, #121212 100%);
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* Header del chat */
+.chat-header {
+  padding: var(--spacing-md) var(--spacing-xl);
+  border-bottom: 1px solid #2a2a2a;
+  background: linear-gradient(135deg, var(--background-secondary) 0%, var(--background-tertiary) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  backdrop-filter: blur(10px);
+}
+
+.chat-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--primary-color) 50%, transparent 100%);
+}
+
+.chat-header-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.025em;
+}
+
+/* Área principal del chat */
+.chat-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-xl);
+  width: 100%;
+  min-height: 0;
+  gap: var(--spacing-lg);
+  overflow: hidden;
+}
+
+/* Overlay para móvil */
+.mobile-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: var(--z-overlay);
+}
+
+.mobile-overlay.visible {
+  display: block;
+}
+
+/* Overlay para formularios */
+.form-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--background-card);
+  z-index: 10;
+  padding: var(--spacing-lg);
+  overflow-y: auto;
+  display: none;
+}
+
+.form-overlay.visible {
+  display: block;
+}
+
+/* Utilidades de layout */
+.container {
+  max-width: 900px;
+  margin: 0 auto var(--spacing-2xl);
+  padding: 0 var(--spacing-md);
+}
+
+.flex-row {
+  display: flex;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+/* Contenedores de página */
+.page-container {
+  max-width: 800px;
+  margin: var(--spacing-2xl) auto;
+  padding: var(--spacing-lg);
+  background-color: var(--background-card);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-medium);
+  border: 1px solid #2d2d2d;
+  width: calc(100% - 2rem);
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-lg);
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+}
+
+.page-title {
+  font-size: var(--font-3xl);
+  font-weight: bold;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.page-content {
+  padding-top: var(--spacing-sm);
+}
+
+/* Layouts específicos */
+.chat-page {
+  max-width: 1200px;
+  margin: var(--spacing-2xl) auto;
+  padding: var(--spacing-lg);
+  background-color: var(--background-card);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-medium);
+  border: 1px solid #2d2d2d;
+  width: calc(100% - 2rem);
+}
+
+.chat-layout {
+  display: flex;
+  gap: var(--spacing-lg);
+  flex-wrap: wrap;
+}
+
+.chat-panel {
+  flex: 2;
+  padding-left: var(--spacing-md);
+  min-width: 300px;
+}
+
+.tools-page {
+  max-width: 1000px;
+  margin: var(--spacing-2xl) auto;
+  padding: var(--spacing-lg);
+  background-color: var(--background-card);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-medium);
+  border: 1px solid #2d2d2d;
+  width: calc(100% - 2rem);
+}
+
+/* Utilidades responsive */
+.hide-mobile {
+  display: block;
+}
+
+.show-mobile {
+  display: none;
+}

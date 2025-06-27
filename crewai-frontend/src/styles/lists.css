@@ -1,0 +1,285 @@
+/* 
+ * LISTS.CSS
+ * Contiene: Componentes de listas, elementos de lista, tool lists, agent panels
+ * Uso: Para todos los componentes de listado de la aplicación
+ * Dependencias: variables.css
+ */
+
+/* Listas base */
+.list {
+  background: var(--background-card);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-medium);
+  padding: var(--spacing-md);
+  flex: 1;
+  max-height: 500px;
+  overflow-y: auto;
+  border: 1px solid #2d2d2d;
+  min-width: 0;
+}
+
+.list-title {
+  font-size: var(--font-lg);
+  margin-bottom: var(--spacing-md);
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.list-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Elementos de lista */
+.list-item {
+  padding: 0.625rem 0.875rem;
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  user-select: none;
+  transition: background-color var(--transition-fast);
+  color: var(--text-primary);
+  word-wrap: break-word;
+  margin-bottom: var(--spacing-xs);
+}
+
+.list-item:hover,
+.list-item.selected {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.list-item:last-child {
+  margin-bottom: 0;
+}
+
+/* Entradas de lista */
+.list-entry {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--background-elevated);
+  margin-bottom: var(--spacing-md);
+  padding: 0.625rem 0.875rem;
+  border-radius: var(--border-radius-sm);
+  transition: background-color var(--transition-fast);
+  gap: var(--spacing-sm);
+  min-width: 0;
+  border: 1px solid transparent;
+}
+
+.list-entry:hover {
+  background-color: #374151;
+  border-color: var(--border-color);
+}
+
+.list-entry:last-child {
+  margin-bottom: 0;
+}
+
+/* Tool lists específicas */
+.tool-list-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: var(--spacing-lg);
+  background-color: var(--background-card);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-medium);
+  border: 1px solid #2d2d2d;
+  width: 100%;
+}
+
+.tool-list-title {
+  font-size: 1.8rem;
+  text-align: center;
+  margin-bottom: var(--spacing-md);
+  color: var(--text-primary);
+}
+
+.tool-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.tool-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+}
+
+.tool-actions {
+  display: flex;
+  gap: 0.625rem;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+
+/* Tools page */
+.tools-title {
+  font-size: var(--font-3xl);
+  font-weight: 700;
+  margin-bottom: var(--spacing-md);
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.tools-actions {
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.tools-content {
+  margin-top: var(--spacing-md);
+}
+
+/* Agent panels */
+.agent-panel {
+  background-color: var(--background-card);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  border: 1px solid #2d2d2d;
+}
+
+.agent-panel-title {
+  font-size: var(--font-md);
+  font-weight: 600;
+  margin-bottom: var(--spacing-md);
+  color: var(--text-primary);
+}
+
+/* Estados de elementos */
+.list-item:active {
+  transform: translateY(1px);
+}
+
+.list-entry:active {
+  transform: scale(0.98);
+}
+
+/* Elementos vacíos */
+.list-empty {
+  text-align: center;
+  color: var(--text-muted);
+  font-style: italic;
+  padding: var(--spacing-xl);
+}
+
+/* Scrollbar para listas */
+.list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.list::-webkit-scrollbar-thumb {
+  background: rgba(59, 130, 246, 0.3);
+  border-radius: 3px;
+}
+
+.list::-webkit-scrollbar-thumb:hover {
+  background: rgba(59, 130, 246, 0.5);
+}
+
+/* Listas responsive */
+.list-responsive {
+  display: grid;
+  gap: var(--spacing-md);
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+/* Metadatos de lista */
+.list-meta {
+  font-size: var(--font-sm);
+  color: var(--text-muted);
+  margin-top: var(--spacing-xs);
+}
+
+/* Acciones de lista */
+.list-actions {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-sm);
+}
+
+/* Separadores de lista */
+.list-separator {
+  height: 1px;
+  background: var(--border-color);
+  margin: var(--spacing-md) 0;
+}
+
+/* Grupos de lista */
+.list-group {
+  margin-bottom: var(--spacing-lg);
+}
+
+.list-group-title {
+  font-size: var(--font-sm);
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: var(--spacing-sm);
+  padding-bottom: var(--spacing-xs);
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Badges en listas */
+.list-badge {
+  background: var(--primary-color);
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--border-radius-xs);
+  font-size: var(--font-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.list-badge.secondary {
+  background: var(--text-muted);
+}
+
+.list-badge.success {
+  background: var(--success-color);
+}
+
+.list-badge.danger {
+  background: var(--danger-color);
+}
+
+/* Animaciones para elementos de lista */
+.list-item-enter {
+  opacity: 0;
+  transform: translateY(-10px);
+  animation: listItemEnter 0.3s ease forwards;
+}
+
+@keyframes listItemEnter {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.list-item-exit {
+  animation: listItemExit 0.3s ease forwards;
+}
+
+@keyframes listItemExit {
+  to {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+}

@@ -1,0 +1,446 @@
+/* 
+ * THEMES.CSS
+ * Contiene: Temas alternativos y variaciones de color para personalización
+ * Uso: Importar DESPUÉS de variables.css para override de temas
+ * Dependencias: variables.css
+ */
+
+/* ==========================================================================
+   TEMA BASE DARK (Por defecto)
+   ========================================================================== */
+
+  /* Este es el tema por defecto, ya definido en variables.css */
+  /* Se incluye aquí como referencia */
+
+
+/* ==========================================================================
+   TEMA LIGHT
+   ========================================================================== */
+
+[data-theme="light"] {
+  /* Backgrounds */
+  --background-primary: #ffffff;
+  --background-secondary: #f8fafc;
+  --background-tertiary: #f1f5f9;
+  --background-card: #ffffff;
+  --background-elevated: #f8fafc;
+  
+  /* Textos */
+  --text-primary: #1f2937;
+  --text-secondary: #374151;
+  --text-muted: #6b7280;
+  --text-disabled: #9ca3af;
+  
+  /* Bordes */
+  --border-color: rgba(0, 0, 0, 0.1);
+  --border-color-light: rgba(0, 0, 0, 0.05);
+  --border-color-strong: rgba(0, 0, 0, 0.2);
+  
+  /* Sombras */
+  --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.05);
+  --shadow-medium: 0 8px 32px rgba(0, 0, 0, 0.1);
+  --shadow-heavy: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Ajustes específicos para el tema light */
+[data-theme="light"] .left-panel {
+  background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+  border-right: 1px solid #e2e8f0;
+}
+
+[data-theme="light"] .right-panel {
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+}
+
+[data-theme="light"] .chat-header {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-bottom: 1px solid #e2e8f0;
+}
+
+[data-theme="light"] .section {
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .message-content {
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .message.user .message-content {
+  background: rgba(59, 130, 246, 0.1);
+  border-color: rgba(59, 130, 246, 0.2);
+}
+
+/* ==========================================================================
+   TEMA BLUE
+   ========================================================================== */
+
+[data-theme="blue"] {
+  --primary-color: #2563eb;
+  --primary-hover: #1d4ed8;
+  --primary-active: #1e40af;
+  
+  --background-primary: #0f172a;
+  --background-secondary: #1e293b;
+  --background-tertiary: #334155;
+  --background-card: #1e293b;
+  --background-elevated: #334155;
+}
+
+[data-theme="blue"] .left-panel {
+  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+}
+
+[data-theme="blue"] .right-panel {
+  background: linear-gradient(180deg, #0f172a 0%, #020617 100%);
+}
+
+/* ==========================================================================
+   TEMA GREEN
+   ========================================================================== */
+
+[data-theme="green"] {
+  --primary-color: #059669;
+  --primary-hover: #047857;
+  --primary-active: #065f46;
+  --success-color: #10b981;
+  --success-hover: #059669;
+  
+  --background-primary: #064e3b;
+  --background-secondary: #065f46;
+  --background-tertiary: #047857;
+  --background-card: #065f46;
+  --background-elevated: #047857;
+}
+
+[data-theme="green"] .left-panel {
+  background: linear-gradient(180deg, #065f46 0%, #064e3b 100%);
+}
+
+[data-theme="green"] .right-panel {
+  background: linear-gradient(180deg, #064e3b 0%, #022c22 100%);
+}
+
+/* ==========================================================================
+   TEMA PURPLE
+   ========================================================================== */
+
+[data-theme="purple"] {
+  --primary-color: #7c3aed;
+  --primary-hover: #6d28d9;
+  --primary-active: #5b21b6;
+  
+  --background-primary: #1e1b4b;
+  --background-secondary: #312e81;
+  --background-tertiary: #3730a3;
+  --background-card: #312e81;
+  --background-elevated: #3730a3;
+}
+
+[data-theme="purple"] .left-panel {
+  background: linear-gradient(180deg, #312e81 0%, #1e1b4b 100%);
+}
+
+[data-theme="purple"] .right-panel {
+  background: linear-gradient(180deg, #1e1b4b 0%, #0f0f23 100%);
+}
+
+/* ==========================================================================
+   TEMA RED
+   ========================================================================== */
+
+[data-theme="red"] {
+  --primary-color: #dc2626;
+  --primary-hover: #b91c1c;
+  --primary-active: #991b1b;
+  --danger-color: #ef4444;
+  --danger-hover: #dc2626;
+  
+  --background-primary: #450a0a;
+  --background-secondary: #7f1d1d;
+  --background-tertiary: #991b1b;
+  --background-card: #7f1d1d;
+  --background-elevated: #991b1b;
+}
+
+[data-theme="red"] .left-panel {
+  background: linear-gradient(180deg, #7f1d1d 0%, #450a0a 100%);
+}
+
+[data-theme="red"] .right-panel {
+  background: linear-gradient(180deg, #450a0a 0%, #1c0000 100%);
+}
+
+/* ==========================================================================
+   TEMA CYBERPUNK
+   ========================================================================== */
+
+[data-theme="cyberpunk"] {
+  --primary-color: #00ff41;
+  --primary-hover: #00e639;
+  --primary-active: #00cc32;
+  --success-color: #00ff41;
+  --success-hover: #00e639;
+  
+  --background-primary: #000000;
+  --background-secondary: #0a0a0a;
+  --background-tertiary: #141414;
+  --background-card: #0a0a0a;
+  --background-elevated: #141414;
+  
+  --text-primary: #00ff41;
+  --text-secondary: #00e639;
+  --text-muted: #008f2a;
+}
+
+[data-theme="cyberpunk"] .left-panel {
+  background: linear-gradient(180deg, #0a0a0a 0%, #000000 100%);
+  border-right: 1px solid #00ff41;
+}
+
+[data-theme="cyberpunk"] .right-panel {
+  background: linear-gradient(180deg, #000000 0%, #000000 100%);
+}
+
+[data-theme="cyberpunk"] .chat-input-container,
+[data-theme="cyberpunk"] .section,
+[data-theme="cyberpunk"] .message-content {
+  border: 1px solid #00ff41;
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+}
+
+[data-theme="cyberpunk"] .new-chat-btn,
+[data-theme="cyberpunk"] .send-button {
+  box-shadow: 0 0 15px rgba(0, 255, 65, 0.5);
+}
+
+/* ==========================================================================
+   TEMA OCEAN
+   ========================================================================== */
+
+[data-theme="ocean"] {
+  --primary-color: #0891b2;
+  --primary-hover: #0e7490;
+  --primary-active: #155e75;
+  
+  --background-primary: #0c4a6e;
+  --background-secondary: #075985;
+  --background-tertiary: #0369a1;
+  --background-card: #075985;
+  --background-elevated: #0369a1;
+  
+  --text-primary: #f0f9ff;
+  --text-secondary: #e0f2fe;
+  --text-muted: #7dd3fc;
+}
+
+[data-theme="ocean"] .left-panel {
+  background: linear-gradient(180deg, #075985 0%, #0c4a6e 100%);
+}
+
+[data-theme="ocean"] .right-panel {
+  background: linear-gradient(180deg, #0c4a6e 0%, #042f49 100%);
+}
+
+/* ==========================================================================
+   TEMA SUNSET
+   ========================================================================== */
+
+[data-theme="sunset"] {
+  --primary-color: #ea580c;
+  --primary-hover: #dc2626;
+  --primary-active: #b91c1c;
+  
+  --background-primary: #431407;
+  --background-secondary: #7c2d12;
+  --background-tertiary: #9a3412;
+  --background-card: #7c2d12;
+  --background-elevated: #9a3412;
+  
+  --text-primary: #fed7aa;
+  --text-secondary: #fdba74;
+  --text-muted: #fb923c;
+}
+
+[data-theme="sunset"] .left-panel {
+  background: linear-gradient(180deg, #7c2d12 0%, #431407 100%);
+}
+
+[data-theme="sunset"] .right-panel {
+  background: linear-gradient(180deg, #431407 0%, #1c0a00 100%);
+}
+
+/* ==========================================================================
+   TEMA AUTO (SIGUE LAS PREFERENCIAS DEL SISTEMA)
+   ========================================================================== */
+
+[data-theme="auto"] {
+  /* Tema light para preferencia light */
+  @media (prefers-color-scheme: light) {
+    --background-primary: #ffffff;
+    --background-secondary: #f8fafc;
+    --background-tertiary: #f1f5f9;
+    --background-card: #ffffff;
+    --background-elevated: #f8fafc;
+    
+    --text-primary: #1f2937;
+    --text-secondary: #374151;
+    --text-muted: #6b7280;
+    --text-disabled: #9ca3af;
+    
+    --border-color: rgba(0, 0, 0, 0.1);
+    --border-color-light: rgba(0, 0, 0, 0.05);
+    --border-color-strong: rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* ==========================================================================
+   UTILIDADES DE TEMAS
+   ========================================================================== */
+
+/* Theme Switcher Component */
+.theme-switcher {
+  position: relative;
+  display: inline-block;
+}
+
+.theme-switcher-button {
+  background: var(--background-elevated);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.theme-switcher-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: var(--background-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+  box-shadow: var(--shadow-medium);
+  min-width: 160px;
+  z-index: var(--z-menu);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all var(--transition-medium);
+}
+
+.theme-switcher.open .theme-switcher-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.theme-option {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.theme-option:hover {
+  background: var(--background-elevated);
+}
+
+.theme-option.active {
+  background: var(--primary-color);
+  color: white;
+}
+
+.theme-preview {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid var(--border-color);
+}
+
+.theme-preview.dark { background: #1f2937; }
+.theme-preview.light { background: #ffffff; }
+.theme-preview.blue { background: #2563eb; }
+.theme-preview.green { background: #059669; }
+.theme-preview.purple { background: #7c3aed; }
+.theme-preview.red { background: #dc2626; }
+.theme-preview.cyberpunk { background: #00ff41; }
+.theme-preview.ocean { background: #0891b2; }
+.theme-preview.sunset { background: #ea580c; }
+
+/* ==========================================================================
+   TRANSICIONES ENTRE TEMAS
+   ========================================================================== */
+
+/* Suave transición al cambiar temas */
+* {
+  transition: 
+    background-color var(--transition-medium),
+    border-color var(--transition-medium),
+    color var(--transition-medium),
+    box-shadow var(--transition-medium);
+}
+
+/* Excluir elementos que no deben tener transición de color */
+.chat-input,
+.form-input,
+.form-textarea,
+button,
+.new-chat-btn,
+.send-button,
+.tools-button {
+  transition: 
+    background-color var(--transition-medium),
+    border-color var(--transition-medium),
+    color var(--transition-medium),
+    box-shadow var(--transition-medium),
+    transform var(--transition-medium);
+}
+
+/* ==========================================================================
+   JAVASCRIPT HELPERS PARA TEMAS
+   ========================================================================== */
+
+/*
+// JavaScript para cambiar temas:
+
+function setTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem('theme', theme);
+}
+
+function getTheme() {
+  return localStorage.getItem('theme') || 'dark';
+}
+
+function initTheme() {
+  const savedTheme = getTheme();
+  setTheme(savedTheme);
+}
+
+// Inicializar tema al cargar la página
+document.addEventListener('DOMContentLoaded', initTheme);
+
+// Auto theme support
+function detectSystemTheme() {
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+    return 'light';
+  }
+  return 'dark';
+}
+
+// Escuchar cambios en preferencias del sistema
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+  if (getTheme() === 'auto') {
+    // Recargar tema auto
+    setTheme('auto');
+  }
+});
+*/

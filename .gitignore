@@ -1,0 +1,16 @@
+# Archivos sensibles
+*.env
+.env.local
+.env.development
+.env.production
+node_modules
+.idea
+/app/__pycache__
+*.pyc
+*.h
+*.pyd
+/app/venv/Lib
+/app/venv
+/venv/Lib
+/venv/Scripts
+venv/pyvenv.cfg

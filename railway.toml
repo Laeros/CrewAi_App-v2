@@ -1,0 +1,5 @@
+[build]
+  dockerfilePath = "./Dockerfile"
+
+[deploy]
+  command = "flask db upgrade"
