@@ -45,7 +45,7 @@ def create_app():
         r"/api/*": {
             "origins": [
                 "http://localhost:5173",
-                "https://crew-ai-front.vercel.app/"
+                "https://crew-ai-front.vercel.app"
             ],
             "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
             "allow_headers": ["Content-Type", "Authorization"]
