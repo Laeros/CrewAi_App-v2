@@ -20,16 +20,8 @@ services:
     environment:
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       - DATABASE_URL=${DATABASE_URL}
-      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
-      - FRONTEND_BASE_URL=${FRONTEND_BASE_URL}
     depends_on:
       - db
-    networks:
-      - crewai-net
 
 volumes:
   pgdata:
-
-networks:
-  crewai-net:
-    driver: bridge
