@@ -70,6 +70,9 @@ def validate_password(password):
 @auth_bp.route('/register', methods=['POST', 'OPTIONS'])
 @cross_origin(origins=ALLOWED_ORIGINS, supports_credentials=True)
 def register():
+    if request.method == 'OPTIONS':
+        return '', 204
+        
     try:
         data = request.get_json()
         if not data or not data.get('username') or not data.get('email') or not data.get('password'):
@@ -114,6 +117,9 @@ def register():
 @auth_bp.route('/login', methods=['POST', 'OPTIONS'])
 @cross_origin(origins=ALLOWED_ORIGINS, supports_credentials=True)
 def login():
+    if request.method == 'OPTIONS':
+        return '', 204
+        
     try:
         data = request.get_json()
         if not data or not data.get('login') or not data.get('password'):
@@ -161,6 +167,9 @@ def logout(current_user):
 @token_required
 @cross_origin(origins=ALLOWED_ORIGINS, supports_credentials=True)
 def change_password(current_user):
+    if request.method == 'OPTIONS':
+        return '', 204
+        
     try:
         data = request.get_json()
         if not data or not data.get('current_password') or not data.get('new_password'):
@@ -231,6 +240,9 @@ def update_profile(current_user):
 @auth_bp.route('/request-reset', methods=['POST', 'OPTIONS'])
 @cross_origin(origins=ALLOWED_ORIGINS, supports_credentials=True)
 def request_reset():
+    if request.method == 'OPTIONS':
+        return '', 204
+        
     try:
         data = request.get_json()
         email = data.get('email', '').strip().lower()
@@ -276,6 +288,9 @@ El equipo de CrewAIApp
 @auth_bp.route('/reset-password', methods=['POST', 'OPTIONS'])
 @cross_origin(origins=ALLOWED_ORIGINS, supports_credentials=True)
 def reset_password():
+    if request.method == 'OPTIONS':
+        return '', 204
+        
     try:
         data = request.get_json()
         token = data.get('token')
