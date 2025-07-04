@@ -13,11 +13,13 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object('config.Config')
 
-    # Configuración CORS global
-    CORS(app, supports_credentials=True, origins=[
+    # ✅ Configuración global de CORS
+    CORS(app, origins=[
         "https://crew-ai-front.vercel.app",
+        "https://crew-ai-front-laeros-projects.vercel.app",
+        "https://crew-ai-front-3gqlmdm0i-laeros-projects.vercel.app",
         "http://localhost:5173"
-    ])
+    ], supports_credentials=True)
 
     app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY', 'change-me')
     app.config['JWT_ACCESS_TOKEN_EXPIRES'] = False
