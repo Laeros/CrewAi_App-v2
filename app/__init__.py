@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from flask_mail import Mail
 from dotenv import load_dotenv
+from app.routes.auth import ALLOWED_ORIGINS
 import os
 
 # Cargar variables de entorno
@@ -18,13 +19,7 @@ def create_app():
     app.config.from_object('config.Config')
 
     # CORS
-    CORS(app, resources={r"/api/*": {"origins": [
-        "https://crew-ai-front.vercel.app",
-        "https://crew-ai-front-laeros-projects.vercel.app",
-        "https://crew-ai-front-3gqlmdm0i-laeros-projects.vercel.app",
-        "http://localhost:3000",
-        "http://localhost:5173"
-    ]}}, supports_credentials=True)
+    CORS(app, origins=ALLOWED_ORIGINS, supports_credentials=True)
 
     # JWT
     app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY', 'your-secret-key-change-in-production')
