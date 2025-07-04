@@ -2,12 +2,21 @@ import json
 import os
 from flask import Blueprint, request, jsonify
 from openai import OpenAI
+from flask_cors import cross_origin
 from app.models import Agent as AgentModel, Tool as ToolModel, ChatLog, User, db
 from app.auth import token_required, get_current_user
 from werkzeug.security import generate_password_hash
 from sqlalchemy.exc import IntegrityError
 
 api_bp = Blueprint('api', __name__, url_prefix='/api')
+
+ALLOWED_ORIGINS = [
+    "https://crew-ai-front.vercel.app",
+    "https://crew-ai-front-laeros-projects.vercel.app", 
+    "https://crew-ai-front-3gqlmdm0i-laeros-projects.vercel.app",
+    "http://localhost:5173",
+    "http://localhost:3000"
+]
 
 # Crear agente (requiere autenticación)
 @api_bp.route('/agents', methods=['POST'])
@@ -410,36 +419,6 @@ def status():
         'authenticated': current_user is not None,
         'user': current_user.to_dict() if current_user else None
     }), 200
-
-@api_bp.route('/auth/register', methods=['POST'])
-def register():
-    try:
-        data = request.get_json()
-
-        # Validar campos requeridos
-        if not data.get('username') or not data.get('password') or not data.get('email'):
-            return jsonify({'message': 'Todos los campos son obligatorios (username, email, password)'}), 400
-
-        # Verificar si el usuario ya existe
-        if User.query.filter_by(username=data['username']).first():
-            return jsonify({'message': 'El nombre de usuario ya está en uso'}), 400
-        if User.query.filter_by(email=data['email']).first():
-            return jsonify({'message': 'El correo electrónico ya está en uso'}), 400
-
-        # Crear nuevo usuario
-        hashed_password = generate_password_hash(data['password'], method='pbkdf2:sha256')
-        user = User(username=data['username'], email=data['email'], password=data['password'])
-        db.session.add(user)
-        db.session.commit()
-
-        return jsonify({'message': 'Usuario registrado exitosamente'}), 201
-
-    except IntegrityError:
-        db.session.rollback()
-        return jsonify({'message': 'Error de integridad. Datos duplicados'}), 400
-    except Exception as e:
-        db.session.rollback()
-        return jsonify({'message': f'Error al registrar usuario: {str(e)}'}), 500
     
 # Rutas administrativas (requieren permisos de administrador)
 
