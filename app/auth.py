@@ -14,6 +14,7 @@ serializer = URLSafeTimedSerializer(os.getenv("JWT_SECRET_KEY", "clave-ultra-sec
 
 # Lista de dominios frontend permitidos
 ALLOWED_ORIGINS = [
+    "https://crew-ai-front.vercel.app",
     "https://crew-ai-front-laeros-projects.vercel.app",
     "https://crew-ai-front-3gqlmdm0i-laeros-projects.vercel.app",
     "http://localhost:5173"  # opcional para desarrollo local
