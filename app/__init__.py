@@ -1,31 +1,21 @@
-from flask import Flask
-from flask_migrate import Migrate
-from flask_sqlalchemy import SQLAlchemy
-from flask_cors import CORS
-from flask_mail import Mail
-from dotenv import load_dotenv
-from app.routes.auth import ALLOWED_ORIGINS
 import os
+from flask import Flask
+from dotenv import load_dotenv
+from app.extensions import db, mail, migrate
+from app.routes import api_bp
+from app.auth import auth_bp
+from app.models import User 
 
-# Cargar variables de entorno
 load_dotenv()
-
-# Inicializaciones globales
-db = SQLAlchemy()
-mail = Mail()
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object('config.Config')
 
-    # CORS
-    CORS(app, origins=ALLOWED_ORIGINS, supports_credentials=True)
-
-    # JWT
-    app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY', 'your-secret-key-change-in-production')
+    # Config CORS (ya manejado por cross_origin en rutas)
+    app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY', 'change-me')
     app.config['JWT_ACCESS_TOKEN_EXPIRES'] = False
 
-    # Configuración de correo
     app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER', 'smtp.sendgrid.net')
     app.config['MAIL_PORT'] = int(os.getenv('MAIL_PORT', 587))
     app.config['MAIL_USE_TLS'] = os.getenv('MAIL_USE_TLS', 'true').lower() == 'true'
@@ -33,37 +23,30 @@ def create_app():
     app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
     app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_DEFAULT_SENDER')
 
-    # Validar configuración SMTP
-    required_mail_vars = ['MAIL_USERNAME', 'MAIL_PASSWORD', 'MAIL_DEFAULT_SENDER']
-    for var in required_mail_vars:
+    # Validar correo
+    for var in ['MAIL_USERNAME', 'MAIL_PASSWORD', 'MAIL_DEFAULT_SENDER']:
         if not app.config.get(var):
-            raise RuntimeError(f"⚠️ La variable de entorno {var} no está configurada para el envío de correos.")
+            raise RuntimeError(f"La variable {var} es obligatoria para el envío de correos")
 
     # Inicializar extensiones
     db.init_app(app)
     mail.init_app(app)
-    Migrate(app, db)
+    migrate.init_app(app, db)
 
     # Registrar blueprints
-    from .routes import api_bp
-    from .auth import auth_bp
-    app.register_blueprint(api_bp, url_prefix="/api")
-    app.register_blueprint(auth_bp, url_prefix="/api/auth")
+    app.register_blueprint(api_bp)
+    app.register_blueprint(auth_bp)
 
-    # Crear tablas y usuario administrador
+    # Crear admin si no existe
     with app.app_context():
         db.create_all()
 
-        from app.models import User  # evitar import circular
-
         admin_email = os.getenv("DEFAULT_ADMIN_EMAIL")
         admin_password = os.getenv("DEFAULT_ADMIN_PASSWORD")
-
         if not admin_email or not admin_password:
-            raise RuntimeError("⚠️ DEFAULT_ADMIN_EMAIL y DEFAULT_ADMIN_PASSWORD deben estar definidos en el entorno.")
+            raise RuntimeError("DEFAULT_ADMIN_EMAIL y DEFAULT_ADMIN_PASSWORD deben estar definidos")
 
-        existing_admin = User.query.filter_by(email=admin_email).first()
-        if not existing_admin:
+        if not User.query.filter_by(email=admin_email).first():
             new_admin = User(
                 username='admin',
                 email=admin_email,
@@ -72,7 +55,7 @@ def create_app():
             )
             db.session.add(new_admin)
             db.session.commit()
-            print(f"✅ Admin creado: {admin_email} / {admin_password}")
+            print(f"✅ Admin creado: {admin_email}")
         else:
             print("ℹ️ Admin ya existe.")
 
