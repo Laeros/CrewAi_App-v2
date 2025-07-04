@@ -68,7 +68,6 @@ def validate_password(password):
 # ------------------- ENDPOINTS -------------------
 
 @auth_bp.route('/register', methods=['POST', 'OPTIONS'])
-@cross_origin(origins=ALLOWED_ORIGINS, supports_credentials=True)
 def register():
     if request.method == 'OPTIONS':
         return '', 204
@@ -115,7 +114,6 @@ def register():
         return jsonify({'message': f'Error interno del servidor: {str(e)}'}), 500
 
 @auth_bp.route('/login', methods=['POST', 'OPTIONS'])
-@cross_origin(origins=ALLOWED_ORIGINS, supports_credentials=True)
 def login():
     if request.method == 'OPTIONS':
         return '', 204
@@ -152,7 +150,6 @@ def login():
 
 @auth_bp.route('/me', methods=['GET', 'OPTIONS'])
 @token_required
-@cross_origin(origins=ALLOWED_ORIGINS, supports_credentials=True)
 def get_current_user_info(current_user):
     if request.method == 'OPTIONS':
         return '', 204
@@ -161,14 +158,12 @@ def get_current_user_info(current_user):
 
 @auth_bp.route('/logout', methods=['POST'])
 @token_required
-@cross_origin(origins=ALLOWED_ORIGINS, supports_credentials=True)
 def logout(current_user):
     log_event(f"🚪 Logout exitoso: {current_user.username}")
     return jsonify({'message': 'Logout exitoso'}), 200
 
 @auth_bp.route('/change-password', methods=['PUT', 'OPTIONS'])
 @token_required
-@cross_origin(origins=ALLOWED_ORIGINS, supports_credentials=True)
 def change_password(current_user):
     if request.method == 'OPTIONS':
         return '', 204
@@ -202,7 +197,6 @@ def change_password(current_user):
 
 @auth_bp.route('/update-profile', methods=['PUT', 'OPTIONS'])
 @token_required
-@cross_origin(origins=ALLOWED_ORIGINS, supports_credentials=True)
 def update_profile(current_user):
     if request.method == 'OPTIONS':
         return '', 204
@@ -244,7 +238,6 @@ def update_profile(current_user):
         return jsonify({'message': f'Error interno del servidor: {str(e)}'}), 500
 
 @auth_bp.route('/request-reset', methods=['POST', 'OPTIONS'])
-@cross_origin(origins=ALLOWED_ORIGINS, supports_credentials=True)
 def request_reset():
     if request.method == 'OPTIONS':
         return '', 204
@@ -292,7 +285,6 @@ El equipo de CrewAIApp
         return jsonify({'message': f'Error al enviar el correo: {str(e)}'}), 500
 
 @auth_bp.route('/reset-password', methods=['POST', 'OPTIONS'])
-@cross_origin(origins=ALLOWED_ORIGINS, supports_credentials=True)
 def reset_password():
     if request.method == 'OPTIONS':
         return '', 204
