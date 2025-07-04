@@ -154,6 +154,9 @@ def login():
 @token_required
 @cross_origin(origins=ALLOWED_ORIGINS, supports_credentials=True)
 def get_current_user_info(current_user):
+    if request.method == 'OPTIONS':
+        return '', 204
+        
     return jsonify({'user': current_user.to_dict()}), 200
 
 @auth_bp.route('/logout', methods=['POST'])
@@ -201,6 +204,9 @@ def change_password(current_user):
 @token_required
 @cross_origin(origins=ALLOWED_ORIGINS, supports_credentials=True)
 def update_profile(current_user):
+    if request.method == 'OPTIONS':
+        return '', 204
+        
     try:
         data = request.get_json()
         if not data:
